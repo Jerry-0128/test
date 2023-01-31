@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajax網路連線basic</title>
+</head>
+<body>
+    <h1>Ajax網路連線basic</h1>
+    <div id="list"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.6/axios.min.js"></script>
+    <script>
+        //  先顯示loading訊息
+        let list = document.getElementById("list");
+        list.innerHTML = '...Loading...'
+        //  透過AJAX Fetch API 連線到遠端的網址，抓取資料
+
+        //  axios
+        // axios.get('https://run.mocky.io/v3/44197d53-8d21-4f45-a40e-2c5b5aac8aff')
+        // .then(res => {
+        //     console.log(res.data);       //  axios 用response.data取得資料
+        // })
+
+
+        /* fetch(網址).then(res => {
+            res 物件，代表伺服器的回應
+        }) */
+        // let src = 'https://run.mocky.io/v3/44197d53-8d21-4f45-a40e-2c5b5aac8aff';
+        let src = 'https://run.mocky.io/v3/263cf8fc-0df0-4641-840d-59f1d9e83030';
+        fetch(src).then(res => {
+            // console.log(res);
+            // return res.text();      //  用字串方式取回資料
+            return res.json();      //  將資料用 JSON 的格式詮釋成陣列與物件的組合
+        }).then(result => {
+            console.log(result);
+            //  把抓到資料放到畫面上
+            list.innerHTML = '';
+            let product = result;
+            let sum = 0;
+            result.forEach(item => {
+                /* list.innerHTML += `
+                    <ul>
+                        <li>${item.index}</li>
+                        <li>${item.name}</li>
+                        <li>${item.money}</li>
+                        <li>${item.age}</li>
+                        <li>${item.sex}</li>
+                    </ul>
+                ` */
+                // list.innerHTML += item.name.bold() + '-' + item.price + '<hr>';
+                list.innerHTML += `${item.name.bold()} - ${item.price}<hr>`;    //  .bold()把字體變粗
+                sum += item.price;
+            });
+            let avg = sum / result.length;
+            // list.innerHTML += '平均售價' + avg;
+            list.innerHTML += `平均售價：${avg}`;
+        })
+
+        
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>
