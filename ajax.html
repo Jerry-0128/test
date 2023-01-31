@@ -16,6 +16,13 @@
         list.innerHTML = '...Loading...'
         //  透過AJAX Fetch API 連線到遠端的網址，抓取資料
 
+        // let data = {"name" : "Jerry"};      //  物件
+        let Data = '{"name" : "Jerry"}';    //  字串
+        console.log('轉換前', Data);
+        Data = JSON.parse(Data);        //  將字串轉換成 JSON 格式
+        console.log('轉換後', Data);
+
+
         //  axios
         // axios.get('https://run.mocky.io/v3/44197d53-8d21-4f45-a40e-2c5b5aac8aff')
         // .then(res => {
